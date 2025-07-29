@@ -1,4 +1,33 @@
 live_config_reload = true
+
+[window]
+opacity = 0.85  # Adjust transparency (0.0 to 1.0)
+blur = true     # Enables background blur (Hyprland must support it)
+
 [font.normal]
 family = "Hack Nerd Font Mono"
-style = "regular"
+style = "Regular"
+
+[colors.primary]
+background = "#0f111a"  # Dark navy blue (Gemini wallpaper base)
+foreground = "#c5c8c6"  # Soft gray-white text
+
+[colors.normal]
+black   = "#0f111a"
+red     = "#ff6c6b"
+green   = "#98be65"
+yellow  = "#ecbe7b"
+blue    = "#51afef"
+magenta = "#c678dd"
+cyan    = "#46d9ff"
+white   = "#dfdfdf"
+
+[colors.bright]
+black   = "#1c1f2a"
+red     = "#ff6c6b"
+green   = "#98be65"
+yellow  = "#ecbe7b"
+blue    = "#51afef"
+magenta = "#c678dd"
+cyan    = "#46d9ff"
+white   = "#ffffff"
