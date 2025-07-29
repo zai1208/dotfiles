@@ -1,0 +1,4 @@
+live_config_reload = true
+[font.normal]
+family = "Hack Nerd Font Mono"
+style = "regular"
