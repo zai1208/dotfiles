@@ -9,5 +9,4 @@ ln -sf $dotfiles_dir/.config ~/.config
 mkdir -p ~/wallpapers
 cp -r $dotfiles_dir/wallpapers/* ~/wallpapers/
 
-echo "[*] Dotfiles deployment done. Ensure hyprland.conf has:"
-echo "    exec-once = swww init && swww img ~/wallpapers/endeavouros_gemini.png"
+echo "[*] Dotfiles deployment done."
