@@ -8,6 +8,7 @@ alacritty
 fuzzel
 thunar
 fastfetch
+gtk4
 ```
 also you must have `exec-once` (will add rest of line later once I figure it out) in your `hyprland.conf`
 
