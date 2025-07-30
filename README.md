@@ -2,10 +2,11 @@
 
 ## dependencies
 ```
-Hyprland
+hyprland
 swww
 alacritty
 fuzzel
+thunar
 fastfetch
 ```
 also you must have `exec-once` (will add rest of line later once I figure it out) in your `hyprland.conf`
