@@ -5,3 +5,4 @@ fuzzel
 thunar
 fastfetch
 gtk4
+hyprlock
