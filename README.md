@@ -17,3 +17,5 @@ can be installed by running `pacman -S $(cat deps.txt)`
 These are heavily inspired by the ml4w dotfiles: https://github.com/mylinuxforwork/dotfiles
 
 Fuzzel config is from: https://github.com/catppuccin/fuzzel/tree/main (specifically the `red.ini` from the mocha themes)
+
+Also includes `trueline.sh` from  https://github.com/petobens/trueline
