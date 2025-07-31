@@ -15,4 +15,4 @@ gtk4
 
 These are heavily inspired by the ml4w dotfiles: https://github.com/mylinuxforwork/dotfiles
 
-Fuzzel config is from: https://github.com/catppuccin/fuzzel/tree/main
+Fuzzel config is from: https://github.com/catppuccin/fuzzel/tree/main (specifically the `red.ini` from the mocha themes)
