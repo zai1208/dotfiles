@@ -10,6 +10,7 @@ thunar
 fastfetch
 gtk4
 ```
+can be installed by running `pacman -S $(cat deps.txt)`
 
 ## inspiration
 
