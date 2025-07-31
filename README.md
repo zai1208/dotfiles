@@ -9,6 +9,7 @@ fuzzel
 thunar
 fastfetch
 gtk4
+hyprlock
 ```
 can be installed by running `pacman -S $(cat deps.txt)`
 
