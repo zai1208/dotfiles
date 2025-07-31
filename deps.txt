@@ -1,1 +1,7 @@
-
+hyprland
+swww
+alacritty
+fuzzel
+thunar
+fastfetch
+gtk4
