@@ -14,7 +14,7 @@ rm -rf ~/wallpapers/
 ln -sf $dotfiles_dir/.config ~/.config
 
 # Symlink wallpapers directory
-ln -sf $dotfiles_dir/wallpapers ~/wallpapers/
+ln -sf $dotfiles_dir/wallpapers ~/wallpapers
 
 # Symlinking other configs
 ln -sf $dotfiles_dir/.bashrc ~/.bashrc
