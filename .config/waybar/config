@@ -12,7 +12,6 @@
   "modules-center": ["clock"],
 
   "modules-right": [
-    "custom/pomodoro",
     "bluetooth",
     "network",
     "pulseaudio", 
@@ -40,16 +39,6 @@
         },
     "on-click": "blueman-manager",
     "tooltip-format-connected":"{device_enumerate}"
-  },
-
-  "custom/music": {
-    "format": "  {}",
-    "escape": true,
-    "interval": 5,
-    "tooltip": false,
-    "exec": "playerctl metadata --format='{{ artist }} - {{ title }}'",
-    "on-click": "playerctl play-pause",
-    "max-length": 50
   },
 
   "clock": {
@@ -126,14 +115,6 @@
   "tooltip": false,
   "on-click": "sh -c '(sleep 0s; hyprlock)' & disown",
   "format" : ""
-  },
-
-  "custom/pomodoro": {
-	"format": "{}",
-	"return-type": "json",
-	"exec": "waybar-module-pomodoro --no-work-icons",
-	"on-click": "waybar-module-pomodoro toggle",
-	"on-click-right": "waybar-module-pomodoro reset",
   },
 
 }
