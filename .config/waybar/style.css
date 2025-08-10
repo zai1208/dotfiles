@@ -42,6 +42,10 @@
   margin-right: 5px; /* Spacing after the uptime module */
 }
 
+#memory {
+  margin-right: 5px;
+}
+
 /* Simple Hover effects for individual left modules - BRIGHTER COLOR */
 #custom-uptime:hover,
 #cpu:hover {
