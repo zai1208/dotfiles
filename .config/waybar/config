@@ -60,7 +60,7 @@
 
   "cpu": {
     "interval": 1,
-    "format": "  {icon0}{icon1}{icon2}{icon3}{icon4} {usage:>2}%",
+    "format": "  {icon} {usage:>2}%",
     "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
     "on-click": "alacritty -e top"
   },
