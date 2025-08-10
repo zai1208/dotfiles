@@ -6,8 +6,8 @@
   "modules-left": [
   "hyprland/workspaces",
   "custom/uptime",
+  "memory",
   "cpu",
-  "memory"
   ],
 
   "modules-center": ["clock"],
