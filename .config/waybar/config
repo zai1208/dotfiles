@@ -60,9 +60,9 @@
 
   "cpu": {
     "interval": 1,
-    "format": "  {icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7} {usage:>2}%",
+    "format": "  {icon0}{icon1}{icon2}{icon3}{icon4} {usage:>2}%",
     "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
-    "on-click": "ghostty -e htop"
+    "on-click": "alacritty -e top"
   },
 
   "memory": {
