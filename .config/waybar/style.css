@@ -38,12 +38,14 @@
   margin-right: 5px; /* Spacing after the workspaces module */
 }
 
-#custom-uptime {
+#custom-uptime,
+#memory {
   margin-right: 5px; /* Spacing after the uptime module */
 }
 
 /* Simple Hover effects for individual left modules - BRIGHTER COLOR */
 #custom-uptime:hover,
+#memory:hover,
 #cpu:hover {
   background-color: rgb(41, 42, 53); /* Brighter highlight */
 }
