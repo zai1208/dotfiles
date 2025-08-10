@@ -46,7 +46,7 @@
     "tooltip": false,
     "format": "{:%I:%M:%S %p  -  %A, %d}",
     "interval": 1
-}
+},
 
   "network": {
     "format-wifi": "󰤢",
