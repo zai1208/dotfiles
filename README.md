@@ -22,3 +22,5 @@ Fuzzel config is from: https://github.com/catppuccin/fuzzel/tree/main (specifica
 Also includes `trueline.sh` from  https://github.com/petobens/trueline
 
 Hyprlock config modified from https://github.com/justinmdickey/publicdots
+
+Waybar config from https://github.com/Prateek7071/dotfiles
