@@ -10,6 +10,7 @@ thunar
 fastfetch
 gtk4
 hyprlock
+brightnessctl
 ```
 can be installed by running `pacman -S $(cat deps.txt)`
 
