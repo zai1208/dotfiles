@@ -11,6 +11,8 @@ fastfetch
 gtk4
 hyprlock
 brightnessctl
+grim
+slurp
 ```
 can be installed by running `pacman -S $(cat deps.txt)`
 
