@@ -14,5 +14,6 @@ then
 fi
 
 export QT_QPA_PLATFORMTHEME=gtk3
+export PATH=~/.local/bin:$PATH
 
 fastfetch
