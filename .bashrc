@@ -13,4 +13,6 @@ then
   source ~/trueline.sh
 fi
 
+export QT_QPA_PLATFORMTHEME=gtk3
+
 fastfetch
