@@ -8,7 +8,7 @@
 alias ls='ls --color=auto'
 alias grep='grep --colour=auto'
 
-if [$XDG_SESSION_TYPE != tty]
+if [ $XDG_SESSION_TYPE != tty ]
 then
   source ~/trueline.sh
 fi
