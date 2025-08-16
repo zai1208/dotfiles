@@ -24,8 +24,8 @@ ln -sf $dotfiles_dir/trueline.sh ~/trueline.sh
 mkdir -p ~/.local/bin
 
 sudo chmod +x $dotfiles_dir/bin/lfimg
-sudo chmod +x $dotfiles_dir/lf/cleaner
-sudo chmod +x $dotfiles_dir/lf/previewer
+sudo chmod +x $dotfiles_dir/.config/lf/cleaner
+sudo chmod +x $dotfiles_dir/.config/lf/previewer
 
 ln -sf $dotfiles_dir/bin/lfimg ~/.local/bin/lfimg
 
