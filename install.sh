@@ -20,4 +20,8 @@ ln -sf $dotfiles_dir/wallpapers ~/wallpapers
 ln -sf $dotfiles_dir/.bashrc ~/.bashrc
 ln -sf $dotfiles_dir/trueline.sh ~/trueline.sh
 
+# installing lf specific things for image preview
+mkdir -p ~/.local/bin
+ln -sf ~/dotfiles/bin/lfimg ~/.local/bin/lfimg
+
 echo "[*] Dotfiles deployment done."
