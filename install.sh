@@ -22,6 +22,11 @@ ln -sf $dotfiles_dir/trueline.sh ~/trueline.sh
 
 # installing lf specific things for image preview
 mkdir -p ~/.local/bin
-ln -sf ~/dotfiles/bin/lfimg ~/.local/bin/lfimg
+
+chmod +x $dotfiles_dir/bin/lfimg
+chmod +x $dotfiles_dir/lf/cleaner
+chmod +x $dotfiles_dir/lf/previewer
+
+ln -sf $dotfiles_dir/bin/lfimg ~/.local/bin/lfimg
 
 echo "[*] Dotfiles deployment done."
