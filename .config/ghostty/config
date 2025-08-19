@@ -1,0 +1,27 @@
+window-opacity = 0.85
+window-blur = true
+
+font-family = Hack Nerd Font Mono
+font-style = Regular
+font-size = 11.0
+
+foreground = #c5c8c6
+background = #0f111a
+
+palette = 0=#0f111a
+palette = 1=#ff6c6b
+palette = 2=#98be65
+palette = 3=#ecbe7b
+palette = 4=#51afef
+palette = 5=#c678dd
+palette = 6=#46d9ff
+palette = 7=#dfdfdf
+
+palette = 8=#1c1f2a
+palette = 9=#ff6c6b
+palette = 10=#98be65
+palette = 11=#ecbe7b
+palette = 12=#51afef
+palette = 13=#c678dd
+palette = 14=#46d9ff
+palette = 15=#ffffff
