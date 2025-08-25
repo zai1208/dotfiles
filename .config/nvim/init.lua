@@ -160,7 +160,7 @@ require("lazy").setup({
       workspaces = {
         {
           name = "notes",
-          path = "~/Documents/Notes",
+          path = "~/notes",
         },
         {
           name = "no-vault",
@@ -184,7 +184,7 @@ require("lazy").setup({
     dependencies = { "nvim-telescope/telescope.nvim" },
     config = function()
       require('telekasten').setup({
-        home = vim.fn.expand("~/Documents/Notes"),
+        home = vim.fn.expand("~/notes"),
       })
     end,
   },
