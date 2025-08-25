@@ -231,6 +231,8 @@ vim.o.tabstop = 2       -- A tab character counts as 2 spaces
 vim.o.shiftwidth = 2    -- Indent commands (>> <<) use 2 spaces
 vim.o.expandtab = true  -- Convert tabs to spaces
 
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
 -- 4. Keymaps (non-whichkey)
 vim.g.mapleader = " "
