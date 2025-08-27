@@ -1,13 +1,44 @@
 -- ~/.config/nvim/init.lua
--- Main Neovim config using lazy.nvim
+-- Fully optimized Neovim config using lazy.nvim, preserving original setup
 
--- 1. Install lazy.nvim if not already installed
+-- ==============================
+-- 1. General editor options
+-- ==============================
+vim.o.termguicolors = true
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.conceallevel = 2
+
+-- Tabs: 2 spaces
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+vim.o.expandtab = true
+
+-- Transparent groups
+local transparent_groups = {
+  "Normal",
+  "NormalNC",
+  "NormalFloat",
+  "NeoTreeNormal",
+  "NeoTreeNormalNC",
+  "EndOfBuffer",
+}
+for _, group in ipairs(transparent_groups) do
+  vim.api.nvim_set_hl(0, group, { bg = "none" })
+end
+
+-- Leader key & non-WhichKey keymaps
+vim.g.mapleader = " "
+vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save file" })
+vim.keymap.set("n", "%", "ggVG", { noremap = true, silent = true, desc = "Select entire file" })
+
+-- ==============================
+-- 2. Install & setup lazy.nvim
+-- ==============================
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
+    "git", "clone", "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
     "--branch=stable",
     lazypath,
@@ -15,53 +46,58 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- 2. Setup lazy.nvim with plugins
 require("lazy").setup({
+  -- ------------------------------
   -- Colorscheme
+  -- ------------------------------
   {
     "nyoom-engineering/oxocarbon.nvim",
+    lazy = false,
     config = function()
       vim.cmd.colorscheme("oxocarbon")
     end,
   },
 
-  -- Neo-tree file explorer
+  -- ------------------------------
+  -- File Explorer: Neo-tree
+  -- ------------------------------
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
     dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons", "MunifTanjim/nui.nvim" },
-    lazy = false,
+    cmd = { "Neotree", "NeoTreeToggle" },
     config = function()
       require("neo-tree").setup({
         filesystem = { filtered_items = { visible = true } },
         window = { position = "left", width = 30 },
         default_component_configs = {
-          name = {
-            -- make file open in a new buffer
-            bind_to_cwd = false,
-            use_expanders = true,
-            click_command = "tabnew", -- <- 'edit' opens in current buffer, 'vsplit' for vertical, 'split' for horizontal
-          },
+          name = { bind_to_cwd = false, use_expanders = true, click_command = "tabnew" },
         },
       })
     end,
   },
-  -- Neogit
+
+  -- ------------------------------
+  -- Git integration: Neogit
+  -- ------------------------------
   {
     "TimUntersberger/neogit",
     dependencies = "nvim-lua/plenary.nvim",
+    cmd = "Neogit",
     config = function()
       require("neogit").setup {}
     end,
   },
 
-  -- WhichKey
+  -- ------------------------------
+  -- WhichKey for leader menus
+  -- ------------------------------
   {
     "folke/which-key.nvim",
+    event = "VeryLazy",
     config = function()
       local wk = require("which-key")
       wk.setup()
-
       wk.add({
         -- File
         { "<leader>f", group = "File" },
@@ -116,97 +152,100 @@ require("lazy").setup({
     end,
   },
 
-  -- Bufferline.nvim
+  -- ------------------------------
+  -- Bufferline
+  -- ------------------------------
   {
     'akinsho/bufferline.nvim',
     version = "*",
     dependencies = 'nvim-tree/nvim-web-devicons',
+    event = "BufAdd",
     config = function()
       require("bufferline").setup({
         options = {
-          numbers = "both", -- shows ordinal + buffer id
+          numbers = "both",
           diagnostics = "nvim_lsp",
           show_buffer_close_icons = true,
           show_close_icon = false,
           separator_style = "slant",
           offsets = {
-            {
-              filetype = "neo-tree",
-              text = "Explorer",  -- optional, shows a label
-              highlight = "Directory",
-              text_align = "left",
-            },
+            { filetype = "neo-tree", text = "Explorer", highlight = "Directory", text_align = "left" }
           },
         },
       })
     end,
   },
 
-  -- Gitsigns.nvim
+  -- ------------------------------
+  -- Gitsigns
+  -- ------------------------------
   {
     "lewis6991/gitsigns.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
+    event = "BufRead",
     config = function()
       require("gitsigns").setup()
     end,
   },
 
-  -- Obsidian.nvim
+  -- ------------------------------
+  -- Obsidian.nvim (autocomplete + commands)
+  -- ------------------------------
   {
     "epwalsh/obsidian.nvim",
     version = "*",
     dependencies = { "nvim-lua/plenary.nvim" },
+    event = "InsertEnter", -- loads early for autocomplete
+    cmd = { "ObsidianNew", "ObsidianOpen", "ObsidianQuickSwitch", "ObsidianSearch", "ObsidianTemplate" },
     opts = {
       workspaces = {
-        {
-          name = "notes",
-          path = "~/notes",
-        },
+        { name = "notes", path = "~/notes" },
         {
           name = "no-vault",
-          path = function()
-            return assert(vim.fs.dirname(vim.api.nvim_buf_get_name(0)))
-          end,
-          overrides = {
-            notes_subdir = vim.NIL,
-            new_notes_location = "current_dir",
-            templates = { folder = vim.NIL },
-            disable_frontmatter = true,
-          },
+          path = function() return assert(vim.fs.dirname(vim.api.nvim_buf_get_name(0))) end,
+          overrides = { notes_subdir = vim.NIL, new_notes_location = "current_dir", templates = { folder = vim.NIL }, disable_frontmatter = true },
         },
       },
     },
   },
 
+  -- ------------------------------
   -- Telekasten.nvim
+  -- ------------------------------
   {
     "renerocksai/telekasten.nvim",
     dependencies = { "nvim-telescope/telescope.nvim" },
+    cmd = { "Telekasten" },
     config = function()
-      require('telekasten').setup({
-        home = vim.fn.expand("~/notes"),
-      })
+      require('telekasten').setup({ home = vim.fn.expand("~/notes") })
     end,
   },
 
-  -- Telescope (dependency for telekasten)
-  { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+  -- ------------------------------
+  -- Telescope (lazy load on command)
+  -- ------------------------------
+  { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" }, cmd = "Telescope" },
 
+  -- ------------------------------
   -- Treesitter
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  -- ------------------------------
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", event = "BufRead" },
 
-  -- LSP
-  { "neovim/nvim-lspconfig" },
+  -- ------------------------------
+  -- LSP & Autocompletion
+  -- ------------------------------
+  { "neovim/nvim-lspconfig", event = "BufReadPre" },
+  { "hrsh7th/nvim-cmp", event = "InsertEnter" },
+  { "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
+  { "L3MON4D3/LuaSnip", event = "InsertEnter" },
 
-  -- Autocompletion
-  { "hrsh7th/nvim-cmp" },
-  { "hrsh7th/cmp-nvim-lsp" },
-  { "L3MON4D3/LuaSnip" },
-
+  -- ------------------------------
   -- Lualine
+  -- ------------------------------
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
+    event = "VimEnter",
     config = function()
       require('lualine').setup {
         options = {
@@ -216,39 +255,8 @@ require("lazy").setup({
           section_separators = { left = '', right = ''},
         },
       }
+      -- Load CosmicInk lualine config
+      require("cosmicink.lualine")
     end,
   },
 })
-
--- 3. General options
-vim.o.termguicolors = true
-vim.o.number = true
-vim.o.relativenumber = true
-vim.o.conceallevel = 2
-
--- Set tabs to 2 spaces everywhere
-vim.o.tabstop = 2       -- A tab character counts as 2 spaces
-vim.o.shiftwidth = 2    -- Indent commands (>> <<) use 2 spaces
-vim.o.expandtab = true  -- Convert tabs to spaces
-
-local transparent_groups = {
-  "Normal",
-  "NormalNC",
-  "NormalFloat",
-  "NeoTreeNormal",
-  "NeoTreeNormalNC",
-  "EndOfBuffer",
-}
-
-for _, group in ipairs(transparent_groups) do
-  vim.api.nvim_set_hl(0, group, { bg = "none" })
-end
-
--- 4. Keymaps (non-whichkey)
-vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save file" })
-vim.keymap.set("n", "%", "ggVG", { noremap = true, silent = true, desc = "Select entire file" })
-
--- Load CosmicInk lualine config
-require("cosmicink.lualine")
-
