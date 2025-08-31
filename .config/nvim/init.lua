@@ -1,5 +1,5 @@
 -- ~/.config/nvim/init.lua
--- Fully optimized Neovim config using lazy.nvim, preserving original setup
+-- Fully optimized NVChad-style Neovim config
 
 -- ==============================
 -- 1. General editor options
@@ -30,7 +30,7 @@ end
 -- Leader key & non-WhichKey keymaps
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save file" })
-vim.keymap.set("n", "%", "ggVG", { noremap = true, silent = true, desc = "Select entire file" })
+vim.keymap.set("n", "<leader>%", "ggVG", { noremap = true, silent = true, desc = "Select entire file" })
 
 -- ==============================
 -- 2. Install & setup lazy.nvim
@@ -47,6 +47,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+
   -- ------------------------------
   -- Colorscheme
   -- ------------------------------
@@ -57,7 +58,38 @@ require("lazy").setup({
       vim.cmd.colorscheme("oxocarbon")
     end,
   },
+  {
+    "goolord/alpha-nvim",
+    lazy = false, -- eager load for startup screen
+    config = function()
+      local alpha = require("alpha")
+      local dashboard = require("alpha.themes.dashboard")
 
+      -- Header: ASCII art or logo
+      dashboard.section.header.val = {
+        "███╗   ██╗███████╗██╗   ██╗",
+        "████╗  ██║██╔════╝██║   ██║",
+        "██╔██╗ ██║█████╗  ██║   ██║",
+        "██║╚██╗██║██╔══╝  ╚██╗ ██╔╝",
+        "██║ ╚████║███████╗ ╚████╔╝",
+        "╚═╝  ╚═══╝╚══════╝  ╚═══╝",
+      }
+
+      -- Buttons / quick actions
+      dashboard.section.buttons.val = {
+        dashboard.button("f", "  Find file", ":Telescope find_files<CR>"),
+        dashboard.button("n", "  New file", ":ene<CR>"),
+        dashboard.button("r", "  Recent files", ":Telescope oldfiles<CR>"),
+        dashboard.button("t", "  Notes Panel", ":Telekasten panel<CR>"),
+        dashboard.button("q", "  Quit", ":qa<CR>"),
+      }
+
+      -- Footer: optional
+      dashboard.section.footer.val = "alpha-nvim"
+
+      alpha.setup(dashboard.opts)
+    end,
+  },
   -- ------------------------------
   -- File Explorer: Neo-tree
   -- ------------------------------
@@ -119,7 +151,7 @@ require("lazy").setup({
         { "<leader>bn", "<cmd>bnext<cr>", desc = "Next Buffer" },
         { "<leader>bP", "<cmd>bprevious<cr>", desc = "Previous Buffer" },
 
-        -- Notes (Telekasten)
+        -- Notes: Telekasten
         { "<leader>n", group = "Notes" },
         { "<leader>nn", "<cmd>Telekasten panel<cr>", desc = "Notes Panel" },
         { "<leader>nf", "<cmd>Telekasten find_notes<cr>", desc = "Find Notes" },
@@ -148,6 +180,11 @@ require("lazy").setup({
 
         -- Explorer
         { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" },
+
+        -- Terminal
+        { "<leader>th", "<cmd>lua toggle_horizontal()<CR>", desc = "Horizontal Terminal" },
+        { "<leader>tv", "<cmd>lua toggle_vertical()<CR>", desc = "Vertical Terminal" },
+        { "<leader>tf", "<cmd>lua toggle_floating()<CR>", desc = "Floating Terminal" },
       })
     end,
   },
@@ -189,13 +226,13 @@ require("lazy").setup({
   },
 
   -- ------------------------------
-  -- Obsidian.nvim (autocomplete + commands)
+  -- Obsidian.nvim
   -- ------------------------------
   {
     "epwalsh/obsidian.nvim",
     version = "*",
     dependencies = { "nvim-lua/plenary.nvim" },
-    event = "InsertEnter", -- loads early for autocomplete
+    event = "InsertEnter",
     cmd = { "ObsidianNew", "ObsidianOpen", "ObsidianQuickSwitch", "ObsidianSearch", "ObsidianTemplate" },
     opts = {
       workspaces = {
@@ -222,7 +259,7 @@ require("lazy").setup({
   },
 
   -- ------------------------------
-  -- Telescope (lazy load on command)
+  -- Telescope
   -- ------------------------------
   { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" }, cmd = "Telescope" },
 
@@ -234,7 +271,7 @@ require("lazy").setup({
   -- ------------------------------
   -- LSP & Autocompletion
   -- ------------------------------
-  { "neovim/nvim-lspconfig", event = "BufReadPre" },
+  { "neovim/nvim-lspconfig", lazy=false},
   { "hrsh7th/nvim-cmp", event = "InsertEnter" },
   { "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
   { "L3MON4D3/LuaSnip", event = "InsertEnter" },
@@ -255,8 +292,84 @@ require("lazy").setup({
           section_separators = { left = '', right = ''},
         },
       }
-      -- Load CosmicInk lualine config
       require("cosmicink.lualine")
     end,
   },
+
+  -- ------------------------------
+  -- Terminal: toggleterm.nvim
+  -- ------------------------------
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    cmd = "ToggleTerm",
+    event = "VeryLazy",
+    config = function()
+      local toggleterm = require("toggleterm")
+      toggleterm.setup({
+        size = 20,
+        open_mapping = [[<c-\>]],
+        hide_numbers = true,
+        shade_terminals = true,
+        shading_factor = 2,
+        start_in_insert = true,
+        persist_size = true,
+        direction = "float",
+        float_opts = { border = "curved", winblend = 0 },
+      })
+
+      local Terminal = require("toggleterm.terminal").Terminal
+      local horizontal = Terminal:new({ direction = "horizontal", close_on_exit = true })
+      local vertical   = Terminal:new({ direction = "vertical", close_on_exit = true })
+      local floating   = Terminal:new({ direction = "float", close_on_exit = true })
+
+      function _G.toggle_horizontal() horizontal:toggle() end
+      function _G.toggle_vertical()   vertical:toggle() end
+      function _G.toggle_floating()   floating:toggle() end
+    end,
+  },
+  -- ------------------------------
+  -- Mason & LSP
+  -- ------------------------------
+  {
+    "williamboman/mason.nvim",
+    lazy = false,
+    cmd = { "Mason", "MasonInstall", "MasonUpdate" },
+    opts = function()
+      return {
+        ui = { border = "rounded" },
+      }
+    end,
+    config = function(_, opts)
+      require("mason").setup(opts)
+    end,
+  },
+
+  {
+    "williamboman/mason-lspconfig.nvim",
+    lazy = false,
+    dependencies = { "williamboman/mason.nvim" },
+    config = function()
+      local mason_lspconfig = require("mason-lspconfig")
+      mason_lspconfig.setup({
+        automatic_installation = true,
+      })
+
+      local lspconfig = require("lspconfig")
+
+      -- Example: lua_ls for Neovim config
+      lspconfig.lua_ls.setup({
+        settings = {
+          Lua = {
+            diagnostics = { globals = { "vim" } },
+            workspace = { checkThirdParty = false },
+            telemetry = { enable = false },
+          },
+        },
+      })
+    end,
+  },
+
+
 })
+
