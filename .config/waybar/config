@@ -64,7 +64,7 @@
     "interval": 1,
     "format": "  {icon} {usage:>2}%",
     "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
-    "on-click": "alacritty -e htop"
+    "on-click": "ghosttty -e htop"
   },
 
   "memory": {
