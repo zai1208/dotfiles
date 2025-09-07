@@ -1,0 +1,97 @@
+// Power menu theme for Rofi
+// Font: Hack Nerd Font
+// Author: Custom
+
+configuration {
+    show-icons: false;
+}
+
+* {
+    mainbox-spacing: 40px;
+    mainbox-margin: 40px;
+    message-margin: 0px 250px;
+    message-padding: 12px;
+    message-border-radius: 12px;
+    listview-spacing: 25px;
+    element-padding: 25px 0px;
+    element-border-radius: 50px;
+    prompt-font: "Hack Nerd Font 16";
+    textbox-font: "Hack Nerd Font 12";
+    element-text-font: "Hack Nerd Font 14";
+    background-window: rgba(0,0,0,0.7);
+    background-normal: rgba(255,255,255,0.05);
+    background-selected: rgba(255,255,255,0.2);
+    foreground-normal: white;
+    foreground-selected: white;
+    foreground-dim: rgba(255,255,255,0.6);
+}
+
+window {
+    transparency: "real";
+    location: center;
+    anchor: center;
+    fullscreen: false;
+    width: 600px;
+    border-radius: 40px;
+    cursor: "default";
+    background-color: @background-window;
+    blur: 15;
+}
+
+mainbox {
+    enabled: true;
+    spacing: @mainbox-spacing;
+    margin: @mainbox-margin;
+    background-color: transparent;
+    children: ["dummy","inputbar","listview","message","dummy"];
+}
+
+inputbar {
+    enabled: false;  // hide input prompt for cleaner menu
+    background-color: transparent;
+    children: ["dummy","prompt","dummy"];
+}
+
+dummy {
+    background-color: transparent;
+}
+
+listview {
+    enabled: true;
+    expand: false;
+    columns: 1;         // vertical list, 1 column
+    lines: 4;           // 4 options
+    cycle: true;        // wrap around with arrows
+    dynamic: false;
+    scrollbar: false;
+    layout: vertical;
+    reverse: false;
+    fixed-height: true;
+    fixed-columns: true;
+    spacing: @listview-spacing;
+    background-color: transparent;
+    cursor: "default";
+}
+
+element {
+    enabled: true;
+    padding: @element-padding;
+    border-radius: @element-border-radius;
+    background-color: @background-normal;
+    text-color: @foreground-normal;
+    cursor: pointer;
+}
+
+element-text {
+    font: @element-text-font;
+    background-color: transparent;
+    text-color: inherit;
+    cursor: inherit;
+    vertical-align: 0.5;
+    horizontal-align: 0.5;
+}
+
+element selected.normal {
+    background-color: @background-selected;
+    text-color: @foreground-selected;
+}
