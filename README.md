@@ -13,7 +13,8 @@ hyprlock
 brightnessctl
 grim
 slurp
-htop
+btop
+rofi
 ```
 can be installed by running `pacman -S $(cat deps.txt)`
 
