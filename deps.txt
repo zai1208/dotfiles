@@ -9,4 +9,5 @@ hyprlock
 brightnessctl
 grim
 slurp
-htop
+btop
+rofi
