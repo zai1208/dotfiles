@@ -115,7 +115,7 @@
   
   "custom/power": {
   "tooltip": false,
-  "on-click": "sh -c '~/.local/bin/powermenu' & disown",
+  "on-click": "sh -c '$HOME/.config/waybar/scripts/powermenu.sh' & disown",
   "format": ""
   }
 
