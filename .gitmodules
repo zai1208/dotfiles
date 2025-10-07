@@ -1,0 +1,6 @@
+[submodule "nvim"]
+	path = nvim
+	url = https://github.com/zai1208/lazyvim-fork
+[submodule ".config/nvim"]
+	path = .config/nvim
+	url = https://github.com/zai1208/lazyvim-fork
