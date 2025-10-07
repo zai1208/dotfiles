@@ -20,6 +20,10 @@ ln -sf $dotfiles_dir/wallpapers ~/wallpapers
 ln -sf $dotfiles_dir/.bashrc ~/.bashrc
 ln -sf $dotfiles_dir/trueline.sh ~/trueline.sh
 
+curl -L https://github.com/akinomyoga/ble.sh/releases/download/nightly/ble-nightly.tar.xz | tar xJf -
+bash ble-nightly/ble.sh --install ~/.local/share
+echo 'source -- ~/.local/share/blesh/ble.sh' >> ~/.bashrc
+
 chmod +x $dotfiles_dir/.config/waybar/scripts/*
 
 echo "[*] Dotfiles deployment done."
