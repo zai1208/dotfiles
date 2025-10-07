@@ -11,6 +11,10 @@ fastfetch
 gtk4
 hyprlock
 brightnessctl
+neovim
+librsvg
+ghostscript
+imagemagick
 grim
 slurp
 btop
