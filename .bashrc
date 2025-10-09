@@ -7,6 +7,7 @@
 
 alias ls='ls --color=auto'
 alias grep='grep --colour=auto'
+alias newnote='nvim -c "enew | set filetype=markdown | ObsidianNew Lecture notes: $(date +%Y-%m-%d-%H%M%S)" +startinsert'
 
 if [ $XDG_SESSION_TYPE != tty ]
 then
