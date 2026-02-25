@@ -9,12 +9,23 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
 newnote() {
-  if [ -d "{$1}" ]; then
-    mkdir "{$1}"
-  fi
-  nvim -c "enew | set filetype=markdown | ObsidianNew Lecture notes: $(date +%Y-%m-%d-%H%M%S)" +startinsert
-  mv "$HOME/notes/$(date +%Y-%m-%d-%H%M%S).md" "$HOME/notes/{$1}/$(date +Y%-%m-%d-%H%M%S).md"
+    BASE_DIR="$HOME/notes"
+    NOTE_DIR="$BASE_DIR"
 
+    # Optional subdirectory
+    if [ -n "$1" ]; then
+        NOTE_DIR="$BASE_DIR/$1"
+        mkdir -p "$NOTE_DIR"
+    fi
+
+    # Open Neovim with ObsidianNew in the base notes folder
+    nvim -c "enew | set filetype=markdown | ObsidianNew Lecture notes: $(date +%Y-%m-%d-%H%M%S)" +startinsert "$BASE_DIR"
+
+    # Detect the newest .md file in BASE_DIR
+    NEW_NOTE=$(ls -t "$BASE_DIR"/*.md | head -n1)
+
+    # Move it to the target subdirectory
+    mv "$NEW_NOTE" "$NOTE_DIR/"
 }
 
 if [ "$XDG_SESSION_TYPE" != tty ]; then
