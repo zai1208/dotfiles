@@ -33,3 +33,4 @@ fastfetch
 source -- ~/.local/share/blesh/ble.sh
 eval "$(zoxide init bash)"
 source -- ~/.local/share/blesh/ble.sh
+source -- ~/.local/share/blesh/ble.sh
