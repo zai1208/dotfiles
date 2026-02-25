@@ -9,12 +9,11 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
 newnote() {
-  if [ -d "{$1}" ]; then
-    mkdir "{$1}"
+  if [ ! -d "$HOME/notes/$1" ]; then
+    mkdir -p "$HOME/notes/$1"
   fi
   nvim -c "enew | set filetype=markdown | ObsidianNew Lecture notes: $(date +%Y-%m-%d-%H%M%S)" +startinsert
-  mv "$HOME/notes/$(date +%Y-%m-%d-%H%M%S).md" "$HOME/notes/{$1}/$(date +Y%-%m-%d-%H%M%S).md"
-
+  mv "$(ls -t $HOME/notes/*.md | head -n1)" "$HOME/notes/$1"
 }
 
 if [ "$XDG_SESSION_TYPE" != tty ]; then
@@ -39,3 +38,4 @@ echo -e "\033[38;5;105m  ╚═\033[38;5;104m═════╝  ╚═╝  ╚�
 fastfetch
 source -- ~/.local/share/blesh/ble.sh
 eval "$(zoxide init bash)"
+PATH=~/.local.share/gem/ruby/3.4.0/bin:/home/zai1208/.local/bin:/home/zai1208/.local/bin:/home/zai1208/.local/bin:/home/zai1208/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
