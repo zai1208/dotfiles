@@ -6,11 +6,18 @@
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
-alias grep='grep --colour=auto'
-alias newnote='nvim -c "enew | set filetype=markdown | ObsidianNew Lecture notes: $(date +%Y-%m-%d-%H%M%S)" +startinsert'
+alias grep='grep --color=auto'
 
-if [ $XDG_SESSION_TYPE != tty ]
-then
+newnote() {
+  if [ -d "{$1}" ]; then
+    mkdir "{$1}"
+  fi
+  nvim -c "enew | set filetype=markdown | ObsidianNew Lecture notes: $(date +%Y-%m-%d-%H%M%S)" +startinsert
+  mv "$HOME/notes/$(date +%Y-%m-%d-%H%M%S).md" "$HOME/notes/{$1}/$(date +Y%-%m-%d-%H%M%S).md"
+
+}
+
+if [ "$XDG_SESSION_TYPE" != tty ]; then
   source ~/trueline.sh
 fi
 
@@ -32,5 +39,3 @@ echo -e "\033[38;5;105m  ╚═\033[38;5;104m═════╝  ╚═╝  ╚�
 fastfetch
 source -- ~/.local/share/blesh/ble.sh
 eval "$(zoxide init bash)"
-source -- ~/.local/share/blesh/ble.sh
-source -- ~/.local/share/blesh/ble.sh
