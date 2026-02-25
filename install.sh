@@ -18,6 +18,7 @@ ln -sf $dotfiles_dir/wallpapers ~/wallpapers
 
 # Symlinking other configs
 ln -sf $dotfiles_dir/.bashrc ~/.bashrc
+ln -sf $dotfiles_dir/.bash_profile ~/.bash_profile
 ln -sf $dotfiles_dir/trueline.sh ~/trueline.sh
 
 curl -L https://github.com/akinomyoga/ble.sh/releases/download/nightly/ble-nightly.tar.xz | tar xJf -
