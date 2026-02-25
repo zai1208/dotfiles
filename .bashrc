@@ -9,23 +9,11 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
 newnote() {
-    BASE_DIR="$HOME/notes"
-    NOTE_DIR="$BASE_DIR"
-
-    # Optional subdirectory
-    if [ -n "$1" ]; then
-        NOTE_DIR="$BASE_DIR/$1"
-        mkdir -p "$NOTE_DIR"
-    fi
-
-    # Open Neovim with ObsidianNew in the base notes folder
-    nvim -c "enew | set filetype=markdown | ObsidianNew Lecture notes: $(date +%Y-%m-%d-%H%M%S)" +startinsert "$BASE_DIR"
-
-    # Detect the newest .md file in BASE_DIR
-    NEW_NOTE=$(ls -t "$BASE_DIR"/*.md | head -n1)
-
-    # Move it to the target subdirectory
-    mv "$NEW_NOTE" "$NOTE_DIR/"
+  if [ ! -d "$HOME/notes/$1" ]; then
+    mkdir -p "$HOME/notes/$1"
+  fi
+  nvim -c "enew | set filetype=markdown | ObsidianNew Lecture notes: $(date +%Y-%m-%d-%H%M%S)" +startinsert
+  mv "$(ls -t $HOME/notes/*.md | head -n1)" "$HOME/notes/$1"
 }
 
 if [ "$XDG_SESSION_TYPE" != tty ]; then
@@ -50,3 +38,4 @@ echo -e "\033[38;5;105m  ╚═\033[38;5;104m═════╝  ╚═╝  ╚�
 fastfetch
 source -- ~/.local/share/blesh/ble.sh
 eval "$(zoxide init bash)"
+PATH=~/.local.share/gem/ruby/3.4.0/bin:/home/zai1208/.local/bin:/home/zai1208/.local/bin:/home/zai1208/.local/bin:/home/zai1208/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
