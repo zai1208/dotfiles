@@ -1,6 +1,6 @@
 (define-configuration buffer
 		      ((default-modes
-			 (pushnew 'nyxt/mode/vi:vi-normal mode %slot-value%))))
+			 (pushnew 'nyxt/mode/vi:vi-normal-mode %slot-value%))))
 (define-configuration web-buffer
 		      ((default modes
 				(pushnew 'nyxt/mode/blocker:blocker-mode %slot-value%))))
