@@ -18,7 +18,8 @@
     "pulseaudio", 
     "backlight",
     "battery",
-    "custom/power"
+    "custom/power",
+    "custom/kdeconnect"
   ],
 
   "hyprland/workspaces": {
@@ -81,6 +82,13 @@
     "exec": "$HOME/.config/waybar/scripts/uptime.sh"
   },
   
+  "custom/kdeconnect": {
+      "exec": "$HOME/.config/waybar/custom_modules/custom-kdeconnect.sh battery",
+      "format": " {}",
+      "interval": 60,
+      "on-click": "$HOME/.config/waybar/custom_modules/custom-kdeconnect.sh ring"
+  },
+
   "backlight": {
         "format": "{icon}  {percent}%",
         "format-icons": ["","󰃜", "󰃛", "󰃞","󰃝","󰃟","󰃠"],

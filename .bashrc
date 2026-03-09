@@ -20,7 +20,7 @@ if [ "$XDG_SESSION_TYPE" != tty ]; then
   source ~/trueline.sh
 fi
 
-export QT_QPA_PLATFORMTHEME=gtk3
+export QT_QPA_PLATFORMTHEME=qt6ct
 export PATH=~/.local/bin:$PATH
 
 echo -e "\033[38;5;105m  ██\033[38;5;104m█████╗   █████╗   ██╗   ██╗  ██████╗    ████\033[38;5;103m██╗    █████\033[38;5;97m╗ \033[39m"
@@ -39,3 +39,4 @@ fastfetch
 source -- ~/.local/share/blesh/ble.sh
 eval "$(zoxide init bash)"
 PATH=~/.local.share/gem/ruby/3.4.0/bin:/home/zai1208/.local/bin:/home/zai1208/.local/bin:/home/zai1208/.local/bin:/home/zai1208/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+PATH=/home/zai1208/.local/share/gem/ruby/3.4.0/bin:/home/zai1208/.local.share/gem/ruby/3.4.0/bin:/home/zai1208/.local/bin:/home/zai1208/.local/bin:/home/zai1208/.local/bin:/home/zai1208/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
